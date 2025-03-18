@@ -32,7 +32,9 @@ async function verifyOtp(req,res) {
             return res.status(401).json("Otp expired please request a new one...!")
         }
         const token = jsonwebtoken.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'1h'});
-
+        user.otp=null;
+        user.otpExpires = null;
+        user.save();
         res.cookie("jwt",token,{
             httpOnly:false,
             secure:false,
@@ -49,6 +51,7 @@ async function verifyOtp(req,res) {
 async function Register(req, res) {
     try {
         const {name, phone, mail} = req.body;
+        console.log(name+" "+phone+" "+mail)
         const user = await User.findOne({phone_number:phone});
         const email_exists = await User.findOne({email_id:mail});
         if(user || email_exists) {
