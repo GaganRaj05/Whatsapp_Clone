@@ -1,5 +1,6 @@
 const Contacts = require('../models/Contacts');
 const User = require("../models/Users")
+const redisClient = require("../config/redis")
 async function getContacts(req,res) {
     try {
         const user_id = req.user_id;
@@ -48,4 +49,16 @@ async function addContact(req, res) {
         return res.status(501).json("Internal Server Error")
     }
 }
-module.exports = {getContacts,addContact};
+
+async function handleMessages(req, res) {
+    try {
+        const messages = await redisClient.lRange("chat_messages",0,-1);
+        console.log(messages);
+        return res.status(201).json({messages});
+    }
+    catch(err) {
+        return res.status(500).json("Failed to fetch messages")
+    }
+}
+
+module.exports = {getContacts,addContact, handleMessages};
