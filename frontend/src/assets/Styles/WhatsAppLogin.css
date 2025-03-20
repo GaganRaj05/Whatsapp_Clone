@@ -1,0 +1,182 @@
+/* Overall Page Layout */
+.whatsapp-page {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #fcf5eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  
+}
+body{
+  background-color: #fcf5eb;
+}
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 100px;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.whatsapp-logo {
+  width: 60px;
+  margin-bottom: 200px;
+  
+}
+
+/* Download Button */
+.download-button {
+  background-color: #0d622c;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s ease;
+  margin-left:900px ;
+  height: 60px;
+  width: 250px;
+  border-radius: 50px;
+  margin-bottom: 200px;
+}
+
+.download-button:hover {
+  background-color: #128C7E;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+/* Login Box */
+.whatsapp-login-container {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid black;
+  padding: 40px;
+  width: 650px;
+  height: 350;
+}
+
+.whatsapp-login-box {
+  text-align: center;
+  color: black;
+}
+
+.whatsapp-login-box h2 {
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* Phone Input */
+.phone-input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 50px;
+}
+
+.phone-input:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.5);
+}
+
+/* Next Button */
+.next-button {
+  width: 20%;
+  background-color: #0d622c;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.next-button:hover {
+  background-color: #1eab53;
+}
+
+/* QR Code Link */
+.qr-code-link {
+  display: block;
+  margin-top: 15px;
+  color: #000000;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #1eab53;
+  font-size: 0.875rem;
+}
+
+.qr-code-link:hover {
+  text-decoration: underline;
+}
+
+/* Encryption Info */
+.encryption-info {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: gray;
+}
+/* OTP Input */
+.otp-input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.otp-input:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.5);
+}
+
+/* Verify Button */
+.verify-button {
+  width: 20%;
+  background-color: #0d622c;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.verify-button:hover {
+  background-color: #1eab53;
+}
