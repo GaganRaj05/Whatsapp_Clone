@@ -9,7 +9,8 @@ const featureRoutes = require("./routes/features")
 const http = require("http");
 const {Server} = require("socket.io");
 const redisClient = require("./config/redis");
-
+const generateRoomId = require("./config/generateRoomId");
+const { timeStamp } = require("console");
 
 const app = express()
 app.use(express.json())
@@ -28,16 +29,24 @@ const io = new Server(server,{
     }
 });
 
+
+
+
 io.on("connection",(socket)=> {
     console.log("New user connected",socket.id);
 
-    socket.on("send message",async (message) => {
-        try {
-            console.log("Message recieved",message);
-            await redisClient.rPush("chat_messages",message);
-            socket.broadcast.emit("chat message", message);
+    socket.on("join chat",({user1_id, user2_id})=>{
+        const room_id = generateRoomId(user1_id,user2_id);
+        socket.join(room_id);
+        socket.broadcast.emit("room id",`${socket.id} has joined the room ${room_id}`)
+    }) 
 
-            io.emit(message);
+    socket.on("send message",async ({room_id, sender,message}) => {
+        try {   
+            console.log("Message recieved iin room",room_id," from ",sender);
+            const messageData = JSON.stringify({sender,message})
+            await redisClient.rPush(`chat_messages:${room_id}`,messageData);
+            socket.to(room_id).emit("message",{sender,message});   
         }
         catch(err) {
             console.log(err)
@@ -48,7 +57,9 @@ io.on("connection",(socket)=> {
         const cachedMessages = await redisClient.lRange("chat_messages",0,-1);
         socket.emit("load messages",cachedMessages);
     })
-    socket.on("disconnect",()=> {
+    socket.on("disconnect",async ()=> {
+        const cachedMessages = await redisClient.lRange("chat_messages",0,-1);
+        
         console.log("A user disconnected",socket.id);
     })
 })
