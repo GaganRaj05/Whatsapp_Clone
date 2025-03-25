@@ -13,7 +13,7 @@ async function sendOtp(req,res) {
         user.otp = otp;
         user.otpExpires = new Date(Date.now() + 5 * 60000);
         user.save();
-        sendMail(user.email_id,otp);
+        await sendMail(user.email_id,otp);
         return res.status(201).json("Otp sent successfully")
     }
     catch(err) {
@@ -24,6 +24,7 @@ async function sendOtp(req,res) {
 async function verifyOtp(req,res) {
     try {
         const {phone,otp} = req.body;
+        console.log("otp",otp)
         const user = await User.findOne({phone_number:phone});
         if(!user) {
             return res.status(401).json("No user exists");

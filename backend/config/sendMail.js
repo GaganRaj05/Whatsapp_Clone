@@ -19,6 +19,7 @@ async function sendMail(email,otp) {
         let info = await transporter.sendMail(mailOptions);
         console.log(info);
         console.log("mail sent succesfully")
+        return "mail sent successfully"
     }
     catch(err) {
         console.log(err);

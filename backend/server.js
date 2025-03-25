@@ -1,4 +1,5 @@
 require("dotenv").config()
+const cors = require('cors');
 const connectToDB = require('./config/db');
 const auth = require("./routes/auth")
 const express = require('express');
@@ -10,12 +11,15 @@ const http = require("http");
 const {Server} = require("socket.io");
 const redisClient = require("./config/redis");
 const generateRoomId = require("./config/generateRoomId");
-const { timeStamp } = require("console");
 
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(cors({
+    origin:"http://localhost:5173",
+    methods:["GET","POST","PUT","PATCH","DELETE"],
+    credentials:true
+}))
 app.use(morgan("dev"))
 app.use(helmet())
 app.use("/app/auth",auth);
