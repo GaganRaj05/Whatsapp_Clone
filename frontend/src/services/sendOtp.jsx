@@ -3,7 +3,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 async function SendOtp(phoneNum) {
     try {
         console.log(phoneNum)
-        const response = await fetch(`${BACKEND_URL}/login`,{
+        const response = await fetch(`${BACKEND_URL}/auth/login`,{
             method:"POST",
             headers:{"Content-type":"application/json"},
             body:JSON.stringify(phoneNum),     

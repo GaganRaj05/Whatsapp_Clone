@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SendOtp from "../services/sendOtp";
 import VerifyOtp from "../services/verifyOtp";
+import {useNavigate} from "react-router-dom"
 
 function Login() {
   const [loginFormData, setLoginFormData] = useState({ phone: "" });
@@ -9,12 +10,15 @@ function Login() {
   const [loginFormDisplay, setLoginFormDisplay] = useState(true);
   const [otpFormDisplay, setOtpFormDisplay] = useState(false);
   const [otp,setOtp] = useState("");
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
   const loginFormHandleChange = (e) => {
+    setIsSubmitting(false);
     setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
   };
   const loginFormHandleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     setError("");
 
     const response = await SendOtp(loginFormData);
@@ -59,6 +63,7 @@ function Login() {
         setError("Otp expired please request a new one...!");
     }
     else {
+        navigate("/home");
         alert("successfully");
     }
 
@@ -78,7 +83,7 @@ function Login() {
               onChange={loginFormHandleChange}
               required
             />
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={isSubmitting}>Submit</button>
           </form>
         </div>
       )}
